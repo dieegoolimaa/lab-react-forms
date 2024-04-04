@@ -5,7 +5,6 @@ import TableHeader from "./components/TableHeader";
 import StudentCard from "./components/StudentCard";
 
 import studentsData from "./assets/students.json";
-
 function App() {
   const [students, setStudents] = useState(studentsData);
   const [fullName, setFullName] = useState("");
@@ -13,8 +12,18 @@ function App() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [program, setProgram] = useState("");
-  const [graduationYear, setGraduationYear] = useState(2023); // Default based on min validation
+  const [graduationYear, setGraduationYear] = useState(2023);
   const [graduated, setGraduated] = useState(false);
+
+  // Handler functions for input changes
+  const handleFullNameChange = (event) => setFullName(event.target.value);
+  const handleImageChange = (event) => setImage(event.target.value);
+  const handlePhoneChange = (event) => setPhone(event.target.value);
+  const handleEmailChange = (event) => setEmail(event.target.value);
+  const handleProgramChange = (event) => setProgram(event.target.value);
+  const handleGraduationYearChange = (event) =>
+    setGraduationYear(event.target.value);
+  const handleGraduatedChange = (event) => setGraduated(event.target.checked);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -47,44 +56,33 @@ function App() {
         <div>
           <label>
             Full Name
-            <input
-              value={fullName}
-              onChange={(event) => setFullName(event.target.value)}
-              required
-            />
+            <input value={fullName} onChange={handleFullNameChange} required />
           </label>
 
           <label>
             Profile Image
-            <input
-              value={image}
-              onChange={(event) => setImage(event.target.value)}
-              required
-            />
+            <input value={image} onChange={handleImageChange} required />
           </label>
 
           <label>
             Phone
-            <input
-              value={phone}
-              onChange={(event) => setPhone(event.target.value)}
-              required
-            />
+            <input value={phone} onChange={handlePhoneChange} required />
           </label>
 
           <label>
             Email
-            <input
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-            />
+            <input value={email} onChange={handleEmailChange} />
           </label>
         </div>
 
         <div>
           <label>
             Program
-            <select name="program">
+            <select
+              name="program"
+              value={program}
+              onChange={handleProgramChange}
+            >
               <option value="">-- None --</option>
               <option value="Web Dev">Web Dev</option>
               <option value="UXUI">UXUI</option>
@@ -97,11 +95,14 @@ function App() {
             <input
               name="graduationYear"
               type="number"
-              placeholder="Graduation Year"
+              value={graduationYear}
+              onChange={handleGraduationYearChange}
               minLength={4}
               maxLength={4}
               min={2023}
               max={2030}
+              placeholder="Graduation Year"
+              required
             />
           </label>
 
@@ -111,7 +112,7 @@ function App() {
               type="checkbox"
               name="graduated"
               checked={graduated}
-              onChange={(event) => setGraduated(event.target.checked)}
+              onChange={handleGraduatedChange}
             />
           </label>
 
