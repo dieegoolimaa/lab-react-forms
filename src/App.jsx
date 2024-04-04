@@ -5,37 +5,77 @@ import TableHeader from "./components/TableHeader";
 import StudentCard from "./components/StudentCard";
 
 import studentsData from "./assets/students.json";
-
 function App() {
   const [students, setStudents] = useState(studentsData);
+  const [fullName, setFullName] = useState("");
+  const [image, setImage] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [program, setProgram] = useState("");
+  const [graduationYear, setGraduationYear] = useState(2023); // Default based on min validation
+  const [graduated, setGraduated] = useState(false);
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const newStudent = {
+      fullName,
+      image,
+      phone,
+      email,
+      program,
+      graduationYear,
+      graduated,
+    };
+    setStudents([...students, newStudent]);
+    setFullName("");
+    setImage("");
+    setPhone("");
+    setEmail("");
+    setProgram("");
+    setGraduationYear(2023);
+    setGraduated(false);
+  };
 
   return (
     <div className="App pt-20">
       <Navbar />
 
       {/* FORM */}
-      <form>
+      <form onSubmit={handleSubmit}>
         <span>Add a Student</span>
         <div>
           <label>
             Full Name
-            <input name="fullName" type="text" placeholder="Full Name" />
+            <input
+              value={fullName}
+              onChange={(event) => setFullName(event.target.value)}
+              required
+            />
           </label>
 
           <label>
             Profile Image
-            <input name="image" type="url" placeholder="Profile Image" />
+            <input
+              value={image}
+              onChange={(event) => setImage(event.target.value)}
+            />
           </label>
 
           <label>
             Phone
-            <input name="phone" type="tel" placeholder="Phone" />
+            <input
+              value={phone}
+              onChange={(event) => setPhone(event.target.value)}
+              required
+            />
           </label>
 
           <label>
             Email
-            <input name="email" type="email" placeholder="Email" />
+            <input
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+            />
           </label>
         </div>
 
@@ -70,14 +110,11 @@ function App() {
 
           <button type="submit">Add Student</button>
         </div>
-
       </form>
       {/* FORM END */}
 
-
       {/* TABLE/LIST HEADER */}
       <TableHeader />
-
 
       {/* STUDENT LIST */}
       {students &&
