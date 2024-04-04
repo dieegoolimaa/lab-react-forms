@@ -12,10 +12,10 @@ function App() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [program, setProgram] = useState("");
-  const [graduationYear, setGraduationYear] = useState(2023);
+  const [graduationYear, setGraduationYear] = useState(2023); // Default based on min validation
   const [graduated, setGraduated] = useState(false);
 
-  // Handler functions for input changes
+  // Handler functions for input changes (Iteration 2)
   const handleFullNameChange = (event) => setFullName(event.target.value);
   const handleImageChange = (event) => setImage(event.target.value);
   const handlePhoneChange = (event) => setPhone(event.target.value);
