@@ -5,6 +5,7 @@ import TableHeader from "./components/TableHeader";
 import StudentCard from "./components/StudentCard";
 
 import studentsData from "./assets/students.json";
+
 function App() {
   const [students, setStudents] = useState(studentsData);
   const [fullName, setFullName] = useState("");
@@ -58,6 +59,7 @@ function App() {
             <input
               value={image}
               onChange={(event) => setImage(event.target.value)}
+              required
             />
           </label>
 
@@ -105,7 +107,12 @@ function App() {
 
           <label>
             Graduated
-            <input name="graduated" type="checkbox" />
+            <input
+              type="checkbox"
+              name="graduated"
+              checked={graduated}
+              onChange={(event) => setGraduated(event.target.checked)}
+            />
           </label>
 
           <button type="submit">Add Student</button>
